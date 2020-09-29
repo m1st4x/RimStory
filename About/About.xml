@@ -25,19 +25,21 @@
 		<li>brrainz.harmony</li>
 		<li>UnlimitedHugs.HugsLib</li>
 	</loadAfter>
-	<description> v 1.10 &#xD;
+	<description> v 1.2 &#xD;
 
 # RimStory
 
-++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 [29.09.2020] Update for Rimworld 1.1 and 1.2
 
-Credits go to Khaligufzel, the author of the mod
+Credit goes to Khaligufzel, the author of the mod
 
 Have fun!
 -m1st4x-
-++++++++++++++++++++++++++++++++++++++++++++++++++
-original descrition:
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+original description:
 
 Since starting my first colony in Rimworld I thought the game should be about the Story.
 I remember well when my first colonist die, first marriage in colony, raids... i remember how one guy, who barely knew about medicine, rescued all his palls.
@@ -117,5 +119,5 @@ A: NO! Not at ALL!
 	
 Powered by Harmony (THANKS!).
 	</description>
-	<url>https://steamcommunity.com/id/Khaligufzel/myworkshopfiles/?appid=294100</url>
+	<url>https://github.com/m1st4x/RimStory/releases</url>
 </ModMetaData>
