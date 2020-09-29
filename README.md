@@ -7,10 +7,12 @@
 Credit goes to Khaligufzel, the author of the mod
 
 Have fun!
+
 -m1st4x-
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-original descrition:
+
+original description:
 
 Since starting my first colony in Rimworld I thought the game should be about the Story.
 I remember well when my first colonist die, first marriage in colony, raids... i remember how one guy, who barely knew about medicine, rescued all his palls.
