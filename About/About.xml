@@ -1,3 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+   <name>RimStory</name>
+   <author>Khaligufzel</author>
+   <packageId>Khaligufzel.rimstory</packageId>
+   <supportedVersions>
+      <li>1.1</li>
+   </supportedVersions>
+   <modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>UnlimitedHugs.HugsLib</packageId>
+			<displayName>HugsLib</displayName>
+			<downloadUrl>https://github.com/UnlimitedHugs/RimworldHugsLib/releases/latest</downloadUrl>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/818773962</steamWorkshopUrl>
+		</li>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>UnlimitedHugs.HugsLib</li>
+	</loadAfter>
+	</modDependencies>
+
+	<description> v 1.10 &#xD;
+
 # RimStory
 
 Since starting my first colony in Rimworld I thought the game should be about the Story.
@@ -11,7 +40,7 @@ RimStory logs all important events of life in a colony life for example: deaths,
 
 The colonists will organize anniversary parties, raise their glasses for their fallen comrades on the day they have died and so on!
 
-#### RimStory  
+#### RimStory 
  04.05.2018 v 1.1
 
 #### Features:
@@ -44,18 +73,18 @@ none.
 
 #### FAQ:
 
-##### Q: Is RimStory compatible with X mod?
+# Q: Is RimStory compatible with X mod?
 A: Yes! :) RimStory works with any mod. But, when you want to use RimStory with Psychology I advice to disable funerals in my mod (to not get doubled funerals)
 
 It's working with Days Matter too, but I advice to disable events in my mod or just use RimStory OR Days Matter :)
 
-##### Q: Can you translate RimStory to X language?
+# Q: Can you translate RimStory to X language?
 A: I would love to! But I know only Polish and English (ok... half English!). But... if you do have translation, just send me the files and I will implement your language ASAP :)
 
-##### Q: Can I propose X/Y/Z?
+# Q: Can I propose X/Y/Z?
 A: Yes!
 
-##### Q: Does RimStory affects performance?
+# Q: Does RimStory affects performance?
 A: NO! Not at ALL!
 
 #### Thanks to:
@@ -77,3 +106,6 @@ A: NO! Not at ALL!
 
 	
 Powered by Harmony (THANKS!).
+	</description>
+	<url>https://steamcommunity.com/id/Khaligufzel/myworkshopfiles/?appid=294100</url>
+</ModMetaData>
