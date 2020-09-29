@@ -1,5 +1,17 @@
 # RimStory
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[29.09.2020] Update for Rimworld 1.1 and 1.2
+
+Credit goes to Khaligufzel, the author of the mod
+
+Have fun!
+-m1st4x-
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+original descrition:
+
 Since starting my first colony in Rimworld I thought the game should be about the Story.
 I remember well when my first colonist die, first marriage in colony, raids... i remember how one guy, who barely knew about medicine, rescued all his palls.
 
