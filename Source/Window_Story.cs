@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
-//using SettingsHelper;
 
 namespace RimStory
 {
@@ -18,18 +14,16 @@ namespace RimStory
         Rect inner = new Rect();
         Rect outter = new Rect();
         Rect bigRect = new Rect();
-
         Rect filterRect = new Rect();
 
-        private static int defaultLogSize = 1000;
-       
-       
-        
+        Texture2D texDelete = ContentFinder<Texture2D>.Get("Delete.tex", true);
+        string customText = "";
+
+        private static int defaultLogSize = 200;
 
         public override bool CausesMessageBackground()
         {          
             return base.CausesMessageBackground();
-           
         }
 
         public override void Close(bool doCloseSound = true)
@@ -40,66 +34,94 @@ namespace RimStory
         public override void DoWindowContents(Rect rect)
         {
             base.DoWindowContents(rect);
-            if (RimStoryMod.settings.enableLogging)
+
+            if (!RimStoryMod.settings.enableLogging) return;
+
+            if (Resources.eventsLog != null)
             {
-                bigRect = rect;
-                
+                Text.Font = GameFont.Small;
 
-                bigRect = new Rect(rect.position, new Vector2(rect.width, defaultLogSize + (35f * Resources.eventsLog.Count)));
-                logSize = new Vector2(rect.x, defaultLogSize + (35f * Resources.eventsLog.Count));
-                inner = new Rect(rect.position, logSize);
                 outter = new Rect(rect.position, new Vector2(rect.width - 200, rect.height));
+                float txtWidth = outter.width - 120;
+                float yoff = 20f;
+                float logHeight = 0;
+                foreach (IEvent e in Resources.eventsLog)
+                {
+                    logHeight += Text.CalcHeight(e.ShowInLog(), txtWidth);
+                }
+                logHeight += Resources.eventsLog.Count * 10;
 
-                listing_Standard.Begin(bigRect);
+                bigRect = new Rect(rect.position, new Vector2(rect.width, defaultLogSize + logHeight));
+                logSize = new Vector2(rect.x, defaultLogSize + logHeight);
+                inner = new Rect(rect.position, logSize);
+
                 Widgets.BeginScrollView(outter, ref vect, inner, true);
 
-                if (Resources.eventsLog != null)
+                foreach (IEvent e in Resources.eventsLog)
                 {
-                    foreach (IEvent e in Resources.eventsLog)
+                    if (e != null && e.ShowInLog() != null)
                     {
-                        if (e != null)
+                        if (!Resources.showRaidsInLog && e is ABigThreat) { }
+                        else if (!Resources.showDeadColonistsInLog && e is AMemorialDay) { }
+                        else if (!Resources.showIncidentsInLog && e is IncidentShort) { }
+                        else if (!Resources.showCustomTextInLog && e is CustomEvent) { }
+                        else
                         {
-                            if (e.ShowInLog() != null)
+                            if (e is CustomEvent)
                             {
-                                if (!Resources.showRaidsInLog && e is ABigThreat){}
-                                else if (!Resources.showDeadColonistsInLog && e is AMemorialDay) { }
-                                else if (!Resources.showIncidentsInLog && e is IncidentShort) { }
-                                else
+                                Rect btnRect = new Rect(outter.x + 10, yoff, 20, 20);
+                                if (Widgets.ButtonImage(btnRect, texDelete))
                                 {
-                                    //listing_Standard.AddLabelLine(e.ShowInLog());
-                                    //listing_Standard.AddHorizontalLine(3f);
-                                    listing_Standard.Begin(rect);
-                                    listing_Standard.Label(e.ShowInLog());
-                                    listing_Standard.GapLine();
-                                    listing_Standard.End();
+                                    e.EndEvent();
                                 }
                             }
+                            float height = Text.CalcHeight(e.ShowInLog(), txtWidth);
+                            Widgets.Label(new Rect(outter.x + 50, yoff, txtWidth, height), e.ShowInLog());
+                            yoff += height + 10;
                         }
-                    }
-                    if(Resources.eventsLog.Count == 0)
-                    {
-                        //listing_Standard.AddLabelLine("Nothing here yet.");
-                        listing_Standard.Begin(rect);
-                        listing_Standard.Label("Nothing here yet.");
-                        listing_Standard.End();
                     }
                 }
 
-                Widgets.EndScrollView();
+                foreach (IEvent e in Resources.eventsLog.Reverse<IEvent>())
+                {
+                    if (e is CustomEvent && !e.IsStillEvent())
+                    {
+                        Resources.eventsLog.Remove(e);
+                    }
+                }
 
-                
+                Rect txtRect = new Rect(outter.x + 50, yoff + 20, txtWidth, 200);
+                listing_Standard.Begin(txtRect);
 
-                listing_Standard.End();
-
-
-                filterRect = new Rect(new Vector2(outter.width, rect.position.y), new Vector2(200, 200));
-                listing_Standard.Begin(filterRect);
-                listing_Standard.CheckboxLabeled("ShowRaidsInLog".Translate(), ref Resources.showRaidsInLog);
-                listing_Standard.CheckboxLabeled("ShowDeadColonistsInLog".Translate(), ref Resources.showDeadColonistsInLog);
-                listing_Standard.CheckboxLabeled("ShowIncidentsInLog".Translate(), ref Resources.showIncidentsInLog);
-
+                if (Resources.eventsLog.Count == 0)
+                {
+                    listing_Standard.Label("Nothing here yet.");
+                }
+                listing_Standard.Label("Enter new story:");
+                string str = listing_Standard.TextEntry(this.customText, 3);
+                if (str.Length < 4000)
+                {
+                    this.customText = str;
+                }
+                if (listing_Standard.ButtonText("Save"))
+                {
+                    if (this.customText != "")
+                    {
+                        Resources.eventsLog.Add(new CustomEvent(Utils.CurrentDate(), this.customText));
+                        this.customText = "";
+                    }
+                }
                 listing_Standard.End();
             }
+            Widgets.EndScrollView();
+
+            filterRect = new Rect(new Vector2(outter.width, rect.position.y), new Vector2(200, 200));
+            listing_Standard.Begin(filterRect);
+            listing_Standard.CheckboxLabeled("ShowRaidsInLog".Translate(), ref Resources.showRaidsInLog);
+            listing_Standard.CheckboxLabeled("ShowDeadColonistsInLog".Translate(), ref Resources.showDeadColonistsInLog);
+            listing_Standard.CheckboxLabeled("ShowIncidentsInLog".Translate(), ref Resources.showIncidentsInLog);
+            listing_Standard.CheckboxLabeled("Show custom events", ref Resources.showCustomTextInLog);
+            listing_Standard.End();
         }
 
         public override bool Equals(object obj)
@@ -125,7 +147,6 @@ namespace RimStory
         public override void PostOpen()
         {
             base.PostOpen();
-            
         }
 
         public override void PreClose()
@@ -136,7 +157,6 @@ namespace RimStory
         public override void PreOpen()
         {
             base.PreOpen();
-            
         }
 
         public override string ToString()
@@ -152,7 +172,6 @@ namespace RimStory
         public override void WindowUpdate()
         {
             base.WindowUpdate();
-           
         }
 
         protected override void SetInitialSizeAndPosition()
