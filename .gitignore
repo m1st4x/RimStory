@@ -254,6 +254,14 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
 #/Assemblies
+/Assemblies/0Harmony.dll
+/Assemblies/Assembly-CSharp.dll
+/Assemblies/HugsLib.dll
+/Assemblies/UnityEngine.CoreModule.dll 
+/Assemblies/UnityEngine.IMGUIModule.dll
+/Assemblies/UnityEngine.dll 
+
 /RimStory.sln
 /Source/RimStory.csproj
