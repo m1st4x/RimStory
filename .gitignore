@@ -255,13 +255,8 @@ paket-files/
 __pycache__/
 *.pyc
 
-#/Assemblies
-/Assemblies/0Harmony.dll
-/Assemblies/Assembly-CSharp.dll
-/Assemblies/HugsLib.dll
-/Assemblies/UnityEngine.CoreModule.dll 
-/Assemblies/UnityEngine.IMGUIModule.dll
-/Assemblies/UnityEngine.dll 
+/Assemblies
+!/Assemblies/RimStory.dll
 
 /RimStory.sln
 /Source/RimStory.csproj
