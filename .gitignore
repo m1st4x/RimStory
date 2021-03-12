@@ -256,7 +256,7 @@ __pycache__/
 *.pyc
 
 /Assemblies
-!/Assemblies/RimStory.dll
+!*/Assemblies/RimStory.dll
 
 /RimStory.sln
 /Source/RimStory.csproj
